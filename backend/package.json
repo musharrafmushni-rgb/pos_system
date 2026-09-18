@@ -1,0 +1,24 @@
+{
+  "name": "ecommerce-payment-backend",
+  "version": "1.0.0",
+  "description": "E-Commerce Checkout & Payment System Backend with Stock Reservation and Mock Gateway",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "build": "echo 'No build required'",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/seeds/seedData.js"
+  },
+  "keywords": ["ecommerce", "checkout", "payment-gateway", "stock-reservation", "express", "mongoose"],
+  "author": "Senior Full-Stack Developer",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb-memory-server": "^10.1.3",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0"
+  }
+}

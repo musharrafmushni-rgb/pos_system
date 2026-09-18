@@ -1,0 +1,45 @@
+{
+  "name": "pos-order-inventory-system",
+  "version": "1.0.0",
+  "description": "POS Order & Inventory System with atomic stock reservation, checkout timeouts, and mock payments",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node scripts/seed.js",
+    "test:concurrency": "node scripts/concurrency-test.js"
+  },
+  "keywords": [
+    "pos",
+    "inventory",
+    "mongodb",
+    "express",
+    "concurrency"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "helmet": "^7.1.0",
+    "mongodb-memory-server": "^11.2.0",
+    "mongoose": "^8.8.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
+
+{
+  "name": "techloom-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix backend run build",
+    "start": "npm --prefix backend start"
+  }
+}

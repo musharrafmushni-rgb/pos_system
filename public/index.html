@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brew POS</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="rail">
+        <div class="brand">
+          <span class="brand-mark">BP</span>
+          <div>
+            <strong>Brew POS</strong>
+            <small>Register &amp; inventory</small>
+          </div>
+        </div>
+        <nav class="nav">
+          <button class="nav-btn is-active" data-view="register" type="button">Register</button>
+          <button class="nav-btn" data-view="inventory" type="button">Inventory</button>
+          <button class="nav-btn" data-view="orders" type="button">Orders</button>
+        </nav>
+        <div class="rail-foot">
+          <span class="status-dot" id="api-dot"></span>
+          <span id="api-status">Connecting…</span>
+        </div>
+      </aside>
+
+      <header class="topbar">
+        <h1 id="view-title">Register</h1>
+        <label class="cashier">
+          Cashier / user
+          <input id="user-id" type="text" value="alice" maxlength="40" />
+        </label>
+      </header>
+
+      <main class="stage">
+        <section id="view-register" class="view is-visible">
+          <div class="register-main">
+            <label class="search-bar">
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <input
+                id="product-search"
+                type="search"
+                placeholder="Search products by name…"
+                autocomplete="off"
+              />
+            </label>
+            <div class="catalog" id="product-grid"></div>
+          </div>
+          <aside class="ticket">
+            <div class="ticket-head">
+              <h2>Current ticket</h2>
+              <button id="clear-cart" class="btn ghost" type="button">Clear</button>
+            </div>
+            <ul id="cart-items" class="ticket-list"></ul>
+            <div class="ticket-total">
+              <span>Total</span>
+              <strong id="cart-total">Rs. 0.00</strong>
+            </div>
+            <button id="checkout-btn" class="btn primary" type="button">Checkout &amp; reserve</button>
+            <p class="hint">Checkout reserves stock for 5 minutes. Payment deducts it permanently.</p>
+          </aside>
+        </section>
+
+        <section id="view-inventory" class="view">
+          <form id="product-form" class="panel form-grid">
+            <h2 id="product-form-title">New product</h2>
+            <input type="hidden" id="product-id" />
+            <label>Name <input id="product-name" required maxlength="200" /></label>
+            <label>Price <input id="product-price" type="number" min="0" step="0.01" required /></label>
+            <label>Stock count <input id="product-stock" type="number" min="0" step="1" required /></label>
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Save product</button>
+              <button id="product-cancel" class="btn ghost" type="button">Cancel edit</button>
+            </div>
+          </form>
+          <div class="panel table-wrap">
+            <div class="panel-head">
+              <h2>Catalog</h2>
+              <button id="refresh-products" class="btn ghost" type="button">Refresh stock</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>On hand</th>
+                  <th>Reserved</th>
+                  <th>Available</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="inventory-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="view-orders" class="view">
+          <div class="panel filters">
+            <label>
+              Status
+              <select id="order-status">
+                <option value="">All</option>
+                <option>Pending</option>
+                <option>Paid</option>
+                <option>Cancelled</option>
+                <option>Expired</option>
+                <option>Failed</option>
+              </select>
+            </label>
+            <label class="check">
+              <input id="orders-mine" type="checkbox" />
+              This cashier only
+            </label>
+            <button id="refresh-orders" class="btn ghost" type="button">Refresh</button>
+          </div>
+          <div class="panel table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>User</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th>Reservation</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="orders-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="modal" class="modal" hidden>
+      <div class="modal-card">
+        <h2 id="modal-title">Order</h2>
+        <div id="modal-body"></div>
+        <div id="modal-actions" class="form-actions"></div>
+      </div>
+    </div>
+
+    <div id="toasts" class="toasts"></div>
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
